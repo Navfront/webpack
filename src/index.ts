@@ -1,17 +1,5 @@
-import { calc } from "./calc";
+import { createRoot } from 'react-dom/client'
+import { App } from './app'
 
-
-class Person {
-    name: string
-
-    constructor(name: string) {
-        this.name = name
-    }
-
-    sayHi() {
-        console.log(this.name)
-    }
-}
-
-new Person('Andrey').sayHi()
-console.log(calc(2,3));
+const rootEl = document.getElementById('root')
+createRoot(rootEl).render(App({}))
