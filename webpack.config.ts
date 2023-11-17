@@ -1,9 +1,8 @@
 import { resolve as _resolve, join as _join } from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { ProgressPlugin } from 'webpack'
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 import type { Configuration } from 'webpack'
+import { buildConfig } from './config/webpack/build'
+import { Paths } from './config/webpack/types'
 
 interface EnvVariables {
   mode: 'development' | 'production'
@@ -11,56 +10,13 @@ interface EnvVariables {
 }
 
 export default (env: EnvVariables): Configuration & DevServerConfiguration => {
-  const isDev = env.mode === 'development'
-  const isProd = env.mode === 'production'
+  const buildMode = env.mode ?? 'development'
 
-  return {
-    mode: env.mode ?? 'development',
+  const paths: Paths = {
     entry: _resolve(__dirname, 'src', 'index.ts'),
-    output: {
-      path: _resolve(__dirname, 'build'),
-      filename: 'js/[name].[contenthash]-bundle.js',
-      clean: true
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: _resolve(__dirname, 'public', 'index.html')
-      }),
-      isDev && new ProgressPlugin(),
-      isProd &&
-        new MiniCssExtractPlugin({
-          filename: 'css/styles.[contenthash]-min.css',
-          chunkFilename: 'css/styles.[contenthash]-min.css'
-        })
-    ],
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader'
-          ]
-        },
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/
-        }
-      ]
-    },
-    resolve: {
-      extensions: ['.tsx', '.ts', '.js']
-    },
-    devtool: isDev && 'inline-source-map',
-    devServer: isDev
-      ? {
-          static: {
-            directory: _join(__dirname, 'public')
-          },
-          port: env.port ?? 3000,
-          open: true
-        }
-      : undefined
+    public: _resolve(__dirname, 'public', 'index.html'),
+    output: _resolve(__dirname, 'build')
   }
+
+  return buildConfig({ buildMode, port: env.port, paths })
 }
