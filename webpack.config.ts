@@ -1,5 +1,6 @@
 import { resolve as _resolve, join as _join } from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { ProgressPlugin } from 'webpack'
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 import type { Configuration } from 'webpack'
@@ -11,26 +12,35 @@ interface EnvVariables {
 
 export default (env: EnvVariables): Configuration & DevServerConfiguration => {
   const isDev = env.mode === 'development'
+  const isProd = env.mode === 'production'
 
   return {
     mode: env.mode ?? 'development',
     entry: _resolve(__dirname, 'src', 'index.ts'),
     output: {
       path: _resolve(__dirname, 'build'),
-      filename: '[name].[contenthash]-bundle.js',
+      filename: 'js/[name].[contenthash]-bundle.js',
       clean: true
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: _resolve(__dirname, 'public', 'index.html')
       }),
-      isDev && new ProgressPlugin()
+      isDev && new ProgressPlugin(),
+      isProd &&
+        new MiniCssExtractPlugin({
+          filename: 'css/styles.[contenthash]-min.css',
+          chunkFilename: 'css/styles.[contenthash]-min.css'
+        })
     ],
     module: {
       rules: [
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: [
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader'
+          ]
         },
         {
           test: /\.tsx?$/,
