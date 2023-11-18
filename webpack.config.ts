@@ -15,7 +15,10 @@ export default (env: EnvVariables): Configuration & DevServerConfiguration => {
   const paths: Paths = {
     entry: _resolve(__dirname, 'src', 'index.ts'),
     public: _resolve(__dirname, 'public', 'index.html'),
-    output: _resolve(__dirname, 'build')
+    output: _resolve(__dirname, 'build'),
+    src: _resolve(__dirname, 'src'),
+    shared: _resolve(__dirname, 'src', 'shared'),
+    pages: _resolve(__dirname, 'src', 'pages')
   }
 
   return buildConfig({ buildMode, port: env.port, paths })

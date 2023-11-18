@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Text } from '../../../../../shared/components/text'
+import { Text } from '@shared/components/text'
 
 export const SubPageTwo: FC = () => {
   return (

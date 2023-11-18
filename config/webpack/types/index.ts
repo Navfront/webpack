@@ -11,12 +11,21 @@ export interface Paths {
   entry: string
   output: string
   public: string
+  src: string
+  pages: string
+  shared: string
 }
 
 export type PluginsOptions = {
   buildMode: BuildMode
   htmlPath: string
   bundleAnalyze?: boolean
+}
+
+export type ResolversOptions = {
+  srcPath: string
+  pagesPath: string
+  sharedPath: string
 }
 
 export type RulesOptions = {
