@@ -2,6 +2,7 @@ export interface Options {
   buildMode: BuildMode
   port: number
   paths: Paths
+  bundleAnalyze?: boolean
 }
 
 export type BuildMode = 'development' | 'production'
@@ -15,6 +16,7 @@ export interface Paths {
 export type PluginsOptions = {
   buildMode: BuildMode
   htmlPath: string
+  bundleAnalyze?: boolean
 }
 
 export type RulesOptions = {
