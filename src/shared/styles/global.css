@@ -8,3 +8,7 @@ button {
   border: 1px solid gold;
   color: gold;
 }
+
+a {
+  display: block;
+}
