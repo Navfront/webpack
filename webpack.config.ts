@@ -1,8 +1,8 @@
 import { resolve as _resolve, join as _join } from 'path'
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 import type { Configuration } from 'webpack'
-import { buildConfig } from './config/webpack/build'
-import { Paths } from './config/webpack/types'
+import { buildConfig } from './config/webpack'
+import { Paths } from './config/types'
 
 interface EnvVariables {
   mode: 'development' | 'production'
