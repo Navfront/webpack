@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import { FC, lazy } from 'react'
 import { Link } from 'react-router-dom'
 
-export const AboutPage: FC = () => {
+const AboutPage: FC = () => {
   return (
     <section>
       <Link to={'/'}>To Main Page</Link>
@@ -9,3 +9,5 @@ export const AboutPage: FC = () => {
     </section>
   )
 }
+
+export default AboutPage

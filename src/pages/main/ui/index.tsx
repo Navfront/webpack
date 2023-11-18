@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 
-export const MainPage: FC = () => {
+const MainPage: FC = () => {
   return (
     <section>
       <h1>Main Page</h1>
@@ -13,3 +13,5 @@ export const MainPage: FC = () => {
     </section>
   )
 }
+
+export default MainPage
