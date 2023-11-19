@@ -14,7 +14,8 @@ export const mapDevelop = (
           },
           port: opts.port ?? 3000,
           open: true,
-          historyApiFallback: true
+          historyApiFallback: true,
+          hot: true
         }
       : undefined
   }

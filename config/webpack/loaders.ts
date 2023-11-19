@@ -1,6 +1,7 @@
 import { Configuration } from 'webpack'
 import { RulesOptions } from '../types'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ReactRefreshTypeScript from 'react-refresh-typescript'
 
 export const mapRules = (opts: RulesOptions): Configuration => {
   const isDev = opts.buildMode === 'development'
@@ -38,7 +39,10 @@ export const mapRules = (opts: RulesOptions): Configuration => {
       {
         loader: 'ts-loader',
         options: {
-          transpileOnly: isDev
+          transpileOnly: isDev,
+          getCustomTransformers: () => ({
+            before: [isDev && ReactRefreshTypeScript()].filter(Boolean)
+          })
         }
       }
     ]

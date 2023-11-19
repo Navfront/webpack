@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 
 export const mapPlugins = (opts: PluginsOptions): Configuration => {
   const isDev = opts.buildMode === 'development'
@@ -20,6 +21,7 @@ export const mapPlugins = (opts: PluginsOptions): Configuration => {
   if (isDev) {
     plugins.push(new ProgressPlugin())
     plugins.push(new ForkTsCheckerWebpackPlugin())
+    plugins.push(new ReactRefreshPlugin())
   }
 
   if (isProd) {
