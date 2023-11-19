@@ -9,6 +9,7 @@ export type BuildMode = 'development' | 'production'
 
 export interface Paths {
   entry: string
+  html: string
   output: string
   public: string
   src: string
@@ -19,6 +20,7 @@ export interface Paths {
 export type PluginsOptions = {
   buildMode: BuildMode
   htmlPath: string
+  publicPath: string
   bundleAnalyze?: boolean
 }
 

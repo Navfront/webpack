@@ -18,7 +18,8 @@ export const buildConfig = ({
   ...mapOutput({ outputPath: paths.output }),
   ...mapPlugins({
     buildMode,
-    htmlPath: paths.public,
+    htmlPath: paths.html,
+    publicPath: paths.public,
     bundleAnalyze
   }),
   ...mapRules({ buildMode }),

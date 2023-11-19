@@ -14,7 +14,8 @@ export const mapPlugins = (opts: PluginsOptions): Configuration => {
 
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
-      template: opts.htmlPath
+      template: opts.htmlPath,
+      favicon: opts.publicPath + '/favicon.ico'
     })
   ]
 
