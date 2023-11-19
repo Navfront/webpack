@@ -2,6 +2,7 @@ import { Configuration } from 'webpack'
 import { RulesOptions } from '../types'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ReactRefreshTypeScript from 'react-refresh-typescript'
+import ReactRefreshBabel from 'react-refresh/babel'
 
 export const mapRules = (opts: RulesOptions): Configuration => {
   const isDev = opts.buildMode === 'development'
@@ -48,9 +49,30 @@ export const mapRules = (opts: RulesOptions): Configuration => {
     ]
   }
 
+  const babelLoader: Configuration['loader'] = {
+    test: /\.tsx$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-typescript',
+          [
+            '@babel/preset-react',
+            {
+              runtime: isDev ? 'automatic' : 'classic'
+            }
+          ]
+        ],
+        plugins: [isDev && ReactRefreshBabel].filter(Boolean)
+      }
+    }
+  }
+
   return {
     module: {
-      rules: [svgLoader, assetLoader, cssLoader, tsLoader]
+      rules: [svgLoader, assetLoader, cssLoader, babelLoader]
     }
   }
 }
