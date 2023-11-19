@@ -3,8 +3,8 @@ import { Counter } from '@shared/components/counter'
 
 export const SubPageOne: FC = () => {
   return (
-    <section>
-      <Counter />
+    <section data-testid='subpageone'>
+      <Counter className='counter' />
     </section>
   )
 }
