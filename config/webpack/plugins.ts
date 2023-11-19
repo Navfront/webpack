@@ -7,6 +7,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export const mapPlugins = (opts: PluginsOptions): Configuration => {
   const isDev = opts.buildMode === 'development'
@@ -26,6 +27,13 @@ export const mapPlugins = (opts: PluginsOptions): Configuration => {
   }
 
   if (isProd) {
+    plugins.push(
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: opts.publicPath + '/fonts', to: opts.outputPath + '/fonts' }
+        ]
+      })
+    )
     plugins.push(
       new MiniCssExtractPlugin({
         filename: 'css/styles.[contenthash]-min.css',

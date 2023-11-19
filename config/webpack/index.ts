@@ -20,6 +20,7 @@ export const buildConfig = ({
     buildMode,
     htmlPath: paths.html,
     publicPath: paths.public,
+    outputPath: paths.output,
     bundleAnalyze
   }),
   ...mapRules({ buildMode }),

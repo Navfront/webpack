@@ -21,6 +21,7 @@ export type PluginsOptions = {
   buildMode: BuildMode
   htmlPath: string
   publicPath: string
+  outputPath: string
   bundleAnalyze?: boolean
 }
 
